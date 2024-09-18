@@ -3,7 +3,7 @@ name: Upload DLL Zip Artifact
 on:
   push:
     branches:
-      - main  # Change this to "master" if needed
+      - main  # or master if your default branch is master
 
 jobs:
   upload-zip:
@@ -11,10 +11,13 @@ jobs:
 
     steps:
     - name: Checkout repository code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v2  # This pulls your repository files
 
-    - name: Upload zip file
+    - name: Create zip with DLL only
+      run: zip -r dll-zip reboot.dll  # This zips only the .dll file
+
+    - name: Upload zip as artifact
       uses: actions/upload-artifact@v3
       with:
-        name: dll-zip  # Make sure the name is simple for Nightly.link
-        path: "dll's-20240918T023443Z-001.zip"  # The exact path of your file
+        name: dll-zip  # Artifact name
+        path: dll-zip.zip  # Uploads the .zip file containing only the .dll
