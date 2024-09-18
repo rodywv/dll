@@ -1,0 +1,23 @@
+name: Build and Upload Zip File
+
+on:
+  push:
+    branches:
+      - main  # Change this to "master" if your default branch is "master"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository code
+      uses: actions/checkout@v2  # This pulls your repository code so it can be zipped
+
+    - name: Create zip file
+      run: zip -r release.zip .  # This command zips everything in the repository
+
+    - name: Upload zip as artifact
+      uses: actions/upload-artifact@v2  # This step uploads the zip file as an artifact
+      with:
+        name: release-zip  # The name of the artifact (you can change this if needed)
+        path: release.zip  # The zip file that was just created
