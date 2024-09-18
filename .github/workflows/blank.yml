@@ -3,7 +3,7 @@ name: Upload DLL Zip Artifact
 on:
   push:
     branches:
-      - main  # or master if your default branch is master
+      - main  # or "master" if that's your default branch
 
 jobs:
   upload-zip:
@@ -11,13 +11,14 @@ jobs:
 
     steps:
     - name: Checkout repository code
-      uses: actions/checkout@v2  # This pulls your repository files
+      uses: actions/checkout@v2  # Pulls your repository
 
-    - name: Create zip with DLL only
-      run: zip -r dll-zip reboot.dll  # This zips only the .dll file
+    - name: Create zip with all DLLs
+      run: zip -r dll-zip.zip Fortnite_Console_v2.2.dll Project_Reboot_3.0.dll craniumv2_1.dll  # Add the DLLs to the zip
 
     - name: Upload zip as artifact
       uses: actions/upload-artifact@v3
       with:
-        name: dll-zip  # Artifact name
-        path: dll-zip.zip  # Uploads the .zip file containing only the .dll
+        name: dll-zip  # Name of the artifact
+        path: dll-zip.zip  # Path to the zip file that was just created
+
