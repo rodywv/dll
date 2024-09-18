@@ -1,23 +1,20 @@
-name: Build and Upload Zip File
+name: Upload Pre-existing DLL Zip
 
 on:
   push:
     branches:
-      - main  # Change this to "master" if your default branch is "master"
+      - main  # Change to "master" if that's your default branch
 
 jobs:
-  build:
+  upload-dll-zip:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository code
-      uses: actions/checkout@v2  # This pulls your repository code so it can be zipped
+      uses: actions/checkout@v2  # This pulls your repository code, including your zip file
 
-    - name: Create zip file
-      run: zip -r release.zip .  # This command zips everything in the repository
-
-    - name: Upload zip as artifact
-      uses: actions/upload-artifact@v2  # This step uploads the zip file as an artifact
+    - name: Upload dll zip as artifact
+      uses: actions/upload-artifact@v2  # This uploads the existing zip file as an artifact
       with:
-        name: release-zip  # The name of the artifact (you can change this if needed)
-        path: release.zip  # The zip file that was just created
+        name: dll-zip-artifact  # You can change this name if you like
+        path: "dll's-20240918T023443Z-001.zip"  # This is the zip file you uploaded
