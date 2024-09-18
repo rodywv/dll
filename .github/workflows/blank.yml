@@ -1,1 +1,20 @@
-name: Upload DLL Zip Artifacton:  push:    branches:      - main  #%20Change%20this%20to%20%22master%22%20if%20neededjobs:%20%20upload-zip:%20%20%20%20runs-on:%20ubuntu-latest%20%20%20%20steps:%20%20%20%20-%20name:%20Checkout%20repository%20code%20%20%20%20%20%20uses:%20actions/checkout@v2%20%20%20%20-%20name:%20Upload%20zip%20file%20%20%20%20%20%20uses:%20actions/upload-artifact@v3%20%20%20%20%20%20with:%20%20%20%20%20%20%20%20name:%20dll-zip%20%20#%20Make%20sure%20the%20name%20is%20simple%20for%20Nightly.link%20%20%20%20%20%20%20%20path:%20%22dll's-20240918T023443Z-001.zip%22%20%20#%20The%20exact%20path%20of%20your%20file
+name: Upload DLL Zip Artifact
+
+on:
+  push:
+    branches:
+      - main  # Change this to "master" if needed
+
+jobs:
+  upload-zip:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository code
+      uses: actions/checkout@v2
+
+    - name: Upload zip file
+      uses: actions/upload-artifact@v3
+      with:
+        name: dll-zip  # Make sure the name is simple for Nightly.link
+        path: "dll's-20240918T023443Z-001.zip"  # The exact path of your file
